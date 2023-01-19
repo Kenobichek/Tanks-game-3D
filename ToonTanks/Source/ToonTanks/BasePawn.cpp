@@ -5,10 +5,8 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
 
-// Sets default values
 ABasePawn::ABasePawn()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	CapsuleCompon = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Collider"));
@@ -25,9 +23,7 @@ ABasePawn::ABasePawn()
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
 }
 
-// Called every frame
 void ABasePawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }

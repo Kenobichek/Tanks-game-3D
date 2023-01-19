@@ -14,7 +14,7 @@ class TOONTANKS_API ABasePawn : public APawn
 public:
 	ABasePawn();
 
-public:	
+public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
