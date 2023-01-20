@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -14,8 +12,8 @@ class TOONTANKS_API ABasePawn : public APawn
 public:
 	ABasePawn();
 
-public:
-	virtual void Tick(float DeltaTime) override;
+protected:
+	void rotateTurret(FVector LookAtTarget);
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Variables of the tank", meta = (AllowPrivateAccess = "true"));
