@@ -1,17 +1,14 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Projectile.h"
 
 ABasePawn::ABasePawn()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
 	CapsuleCompon = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Collider"));
-
 	RootComponent = CapsuleCompon;
 
 	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Base Mesh"));
@@ -34,4 +31,12 @@ void ABasePawn::rotateTurret(FVector LookAtTarget)
 		UGameplayStatics::GetWorldDeltaSeconds(this),
 		15.f
 	));
+}
+
+void ABasePawn::fire()
+{
+	FVector location = ProjectileSpawnPoint->GetComponentLocation();
+	FRotator rotation = ProjectileSpawnPoint->GetComponentRotation();
+
+	GetWorld()->SpawnActor<AProjectile>(ProjectileClass, location, rotation);
 }

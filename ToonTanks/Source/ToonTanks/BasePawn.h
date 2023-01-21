@@ -14,18 +14,21 @@ public:
 
 protected:
 	void rotateTurret(FVector LookAtTarget);
+	void fire();
 
 private:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Variables of the tank", meta = (AllowPrivateAccess = "true"));
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Variables of the tank", meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* CapsuleCompon;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Variables of the tank", meta = (AllowPrivateAccess = "true"));
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Variables of the tank", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* BaseMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Variables of the tank", meta = (AllowPrivateAccess = "true"));
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Variables of the tank", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* TurretMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Variables of the tank", meta = (AllowPrivateAccess = "true"));
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Variables of the tank", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileSpawnPoint;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	TSubclassOf<class AProjectile> ProjectileClass;
 };
