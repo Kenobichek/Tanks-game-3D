@@ -5,24 +5,47 @@
 #include "Kismet/GameplayStatics.h"
 #include "Tank.h"
 #include "Tower.h"
+#include "ToonTanksPlayerController.h"
 
 void AToonTanksGameMode::BeginPlay()
 {
 	Super::BeginPlay();
+	handleGameStart();
+}
+
+void AToonTanksGameMode::handleGameStart()
+{
 	tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
+	toonTanksPlayerController = Cast<AToonTanksPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
+
+	if (toonTanksPlayerController)
+	{
+		toonTanksPlayerController->setPlayerEnabledState(false);
+		
+		FTimerHandle playerEnableTimerHandle;
+		FTimerDelegate playerEnableTimerDelegate = FTimerDelegate::CreateUObject(
+			toonTanksPlayerController,
+			&AToonTanksPlayerController::setPlayerEnabledState,
+			true
+		);
+		GetWorldTimerManager().SetTimer(
+			playerEnableTimerHandle,
+			playerEnableTimerDelegate,
+			startDelay,
+			false
+		);
+	}
 }
 
 void AToonTanksGameMode::actorDied(AActor* deadActor)
 {
 	if (deadActor == tank)
 	{
-		APlayerController* tankController = tank->getAPlayerController();
+		tank->handleDestruction();
 
-		if (tankController)
+		if (toonTanksPlayerController)
 		{
-			tank->DisableInput(tankController);
-			tankController->bShowMouseCursor = false;
-			tank->handleDestruction();
+			toonTanksPlayerController->setPlayerEnabledState(false);
 		}
 	}
 	else if (ATower* destroyedTower = Cast<ATower>(deadActor))
