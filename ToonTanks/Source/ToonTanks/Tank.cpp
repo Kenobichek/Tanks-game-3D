@@ -44,6 +44,18 @@ void ATank::Tick(float DeltaTime)
 	}
 }
 
+void ATank::handleDestruction()
+{
+	Super::handleDestruction();
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
+
+APlayerController* ATank::getAPlayerController() const
+{
+	return PlayerController;
+}
+
 void ATank::Move(float value)
 {
 	FVector DeltaLocation = FVector::ZeroVector;
