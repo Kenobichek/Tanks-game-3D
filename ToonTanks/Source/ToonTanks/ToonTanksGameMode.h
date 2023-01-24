@@ -19,6 +19,12 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void startGame();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void gameOver(bool bWonGame);
+
 private:
 	class ATank* tank;
 	class AToonTanksPlayerController* toonTanksPlayerController;
@@ -26,4 +32,6 @@ private:
 	float startDelay = 3.f;
 
 	void handleGameStart();
+	int getTargetTowerCount();
+
 };
