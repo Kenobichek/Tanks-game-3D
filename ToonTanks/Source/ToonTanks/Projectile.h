@@ -19,7 +19,7 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY(VisibleAnywhere, Category = "Combat")
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	UStaticMeshComponent* ProjectileMesh;
 
 	UPROPERTY(VisibleAnywhere, Category = "Movement")
@@ -30,4 +30,19 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float damage = 50.f;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class UParticleSystem* hitParticles;
+
+	UPROPERTY(VisibleAnywhere, Category = "Combat")
+	class UParticleSystemComponent* trailParticles;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class USoundBase* launchSound;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	USoundBase* hitSound;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TSubclassOf<class UCameraShakeBase> hitCameraShakeClass;
 };

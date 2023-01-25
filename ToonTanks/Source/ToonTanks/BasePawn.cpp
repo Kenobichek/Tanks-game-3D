@@ -3,6 +3,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Projectile.h"
+#include "Particles/ParticleSystem.h"
 
 ABasePawn::ABasePawn()
 {
@@ -23,7 +24,18 @@ ABasePawn::ABasePawn()
 
 void ABasePawn::handleDestruction()
 {
-	//
+	if (deathParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, deathParticles, GetActorLocation(), GetActorRotation());
+	}
+	if (deathSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, deathSound, GetActorLocation());
+	}
+	if (deathCameraShakeClass)
+	{
+		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(deathCameraShakeClass);
+	}
 }
 
 void ABasePawn::rotateTurret(FVector LookAtTarget)

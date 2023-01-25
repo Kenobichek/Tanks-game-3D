@@ -49,6 +49,12 @@ void ATank::handleDestruction()
 	Super::handleDestruction();
 	SetActorHiddenInGame(true);
 	SetActorTickEnabled(false);
+	bAlive = false;
+}
+
+bool ATank::checkIsAlive()
+{
+	return bAlive;
 }
 
 APlayerController* ATank::getAPlayerController() const

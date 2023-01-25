@@ -22,6 +22,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void handleDestruction();
+	bool checkIsAlive();
 
 	APlayerController* getAPlayerController() const;
 
@@ -42,4 +43,6 @@ private:
 	void Turn(float value);
 
 	APlayerController* PlayerController;
+
+	bool bAlive = true;
 };
