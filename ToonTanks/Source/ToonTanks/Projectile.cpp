@@ -60,8 +60,8 @@ void AProjectile::onHit(UPrimitiveComponent* hitComp, AActor* otherActor, UPrimi
 		{
 			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(hitCameraShakeClass);
 		}
-		Destroy();
 	}
+	Destroy();
 }
 
 void AProjectile::Tick(float DeltaTime)
